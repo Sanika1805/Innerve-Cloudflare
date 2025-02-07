@@ -1,0 +1,5 @@
+name = "universal-ai-assistant"
+main = "src/index.js"  # or whatever your main file path is
+compatibility_date = "2024-02-07"
+
+# ... any other existing configuration ... 
