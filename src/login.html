@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>AI Assistant - Smart Meeting Management</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: 'Poppins', sans-serif;
+        min-height: 100vh;
+        display: flex;
+        background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .login-container {
+        width: 100%;
+        max-width: 1200px;
+        display: grid;
+        grid-template-columns: 1.3fr 1fr;
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      .login-image {
+        background: linear-gradient(45deg, #4285f4, #0f9d58);
+        padding: 60px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: white;
+      }
+
+      .login-image::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800') center/cover;
+        opacity: 0.1;
+      }
+
+      .login-image h2 {
+        font-size: 2.5em;
+        font-weight: 600;
+        margin-bottom: 20px;
+        position: relative;
+      }
+
+      .features {
+        position: relative;
+        margin-top: 40px;
+      }
+
+      .feature {
+        display: flex;
+        align-items: center;
+        margin-bottom: 25px;
+      }
+
+      .feature-icon {
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        margin-right: 20px;
+      }
+
+      .feature-text h3 {
+        font-size: 18px;
+        margin-bottom: 5px;
+      }
+
+      .feature-text p {
+        font-size: 14px;
+        opacity: 0.9;
+      }
+
+      .login-form {
+        padding: 60px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background: white;
+      }
+
+      .login-header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .login-header img {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 20px;
+      }
+
+      .login-header h1 {
+        font-size: 28px;
+        color: #1a73e8;
+        margin-bottom: 10px;
+        font-weight: 600;
+      }
+
+      .login-header p {
+        color: #5f6368;
+        font-size: 15px;
+      }
+
+      .login-button {
+        background: #1a73e8;
+        color: white;
+        padding: 15px 30px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 500;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        margin-top: 20px;
+      }
+
+      .login-button:hover {
+        background: #1557b0;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(26, 115, 232, 0.2);
+      }
+
+      .google-icon {
+        width: 20px;
+        height: 20px;
+      }
+
+      @media (max-width: 1024px) {
+        .login-container {
+          grid-template-columns: 1fr;
+          max-width: 500px;
+        }
+
+        .login-image {
+          display: none;
+        }
+
+        .login-form {
+          padding: 40px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .login-form {
+          padding: 30px 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="login-image">
+        <h2>Welcome to Smart Meeting Management</h2>
+        <div class="features">
+          <div class="feature">
+            <div class="feature-icon">🤖</div>
+            <div class="feature-text">
+              <h3>AI-Powered Scheduling</h3>
+              <p>Intelligent meeting scheduling with AI assistance</p>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">📝</div>
+            <div class="feature-text">
+              <h3>Smart Agenda Creation</h3>
+              <p>Auto-generate professional meeting agendas</p>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">🔄</div>
+            <div class="feature-text">
+              <h3>Multi-Platform Support</h3>
+              <p>Works with Google Meet, Zoom, and Teams</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="login-form">
+        <div class="login-header">
+          <img src="https://www.gstatic.com/images/branding/product/1x/calendar_48dp.png" alt="Logo">
+          <h1>AI Assistant</h1>
+          <p>Streamline your meetings with AI</p>
+        </div>
+        <a href="/auth/google" class="login-button">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" 
+               alt="Google" 
+               class="google-icon">
+          Continue with Google
+        </a>
+      </div>
+    </div>
+  </body>
+</html> 
