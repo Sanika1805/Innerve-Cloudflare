@@ -1,0 +1,21 @@
+{
+  "name": "ai-assistant",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@google-cloud/local-auth": "^3.0.1",
+    "@slack/web-api": "^7.8.0",
+    "googleapis": "^144.0.0",
+    "itty-router": "^5.0.18",
+    "jsonwebtoken": "^9.0.2",
+    "openai": "^4.83.0",
+    "wrangler": "^3.107.3"
+  }
+}
