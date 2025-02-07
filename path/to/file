@@ -1,1 +1,54 @@
- 
+<form id="editForm" class="edit-form" onsubmit="updateMeeting(event)">
+  <input type="hidden" name="meetingId" value="bdghlcjg1vt6ec3d39cl5ptbac">
+  
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input type="text" id="title" name="title" class="form-control" 
+           placeholder="Enter meeting title" required>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="startTime">Start Time</label>
+      <input type="datetime-local" id="startTime" name="startTime" 
+             class="form-control" required>
+    </div>
+    
+    <div class="form-group col-md-6">
+      <label for="duration">Duration (minutes)</label>
+      <select id="duration" name="duration" class="form-control" required>
+        <option value="15">15 minutes</option>
+        <option value="30">30 minutes</option>
+        <option value="45">45 minutes</option>
+        <option value="60">1 hour</option>
+        <option value="90">1.5 hours</option>
+        <option value="120">2 hours</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea id="description" name="description" class="form-control" 
+              rows="4" placeholder="Enter meeting description"></textarea>
+  </div>
+
+  <div class="form-actions">
+    <button type="button" onclick="hideEditModal()" 
+            class="btn btn-secondary">Cancel</button>
+    <button type="submit" class="btn btn-primary">Update Meeting</button>
+  </div>
+</form>
+
+<!-- Add Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<!-- Initialize AI Assistant -->
+<script src="js/meeting-assistant.js"></script>
+<script>
+  // Wait for DOM to load
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log('Initializing AI Assistant...');
+    new MeetingAssistant();
+  });
+</script> 

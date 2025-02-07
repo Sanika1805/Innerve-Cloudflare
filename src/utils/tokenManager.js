@@ -1,41 +1,22 @@
-import { GoogleAuthHandler } from '../api/auth/googleAuth';
+import jwt from 'jsonwebtoken';
 
 export class TokenManager {
   constructor(env) {
     this.env = env;
-    this.authHandler = new GoogleAuthHandler();
   }
 
   async getValidAccessToken() {
     try {
-      // Get tokens from KV
-      const tokensStr = await this.env.KV.get('google_tokens');
-      if (!tokensStr) {
-        throw new Error('No tokens found');
+      const userData = await this.env.KV.get('user_data');
+      if (!userData) {
+        throw new Error('No user data found');
       }
 
-      const tokens = JSON.parse(tokensStr);
-      const now = Date.now();
-
-      // Check if current token is expired or will expire soon
-      if (!tokens.expiry_date || tokens.expiry_date <= now + 60000) {
-        // Token is expired or will expire soon, refresh it
-        const newTokens = await this.authHandler.refreshAccessToken(tokens.refresh_token);
-        
-        // Update stored tokens
-        await this.env.KV.put('google_tokens', JSON.stringify({
-          ...tokens,
-          access_token: newTokens.access_token,
-          expiry_date: newTokens.expiry_date
-        }));
-
-        return newTokens.access_token;
-      }
-
+      const { tokens } = JSON.parse(userData);
       return tokens.access_token;
     } catch (error) {
-      console.error('Token management error:', error);
-      throw new Error('Authentication required');
+      console.error('Token Manager Error:', error);
+      throw error;
     }
   }
 } 

@@ -67,27 +67,23 @@ export class AIService {
   async generateAgenda(title, participants, context) {
     try {
       const response = await this.openai.chat.completions.create({
-        model: "gpt-4",
+        model: "gpt-3.5-turbo",
         messages: [
           {
             role: "system",
-            content: "You are an AI assistant that helps create effective meeting agendas."
+            content: "You are a helpful meeting assistant that creates meeting agendas."
           },
           {
             role: "user",
-            content: `Please generate a meeting agenda for:
-              Title: ${title}
-              Participants: ${JSON.stringify(participants)}
-              Context: ${context}`
+            content: `Create a meeting agenda for "${title}" with ${participants.length} participants. Context: ${context}`
           }
-        ],
-        temperature: 0.7
+        ]
       });
 
       return response.choices[0].message.content;
     } catch (error) {
-      console.error('AI Agenda Error:', error);
-      throw new Error('Failed to generate agenda');
+      console.error('OpenAI API error:', error);
+      return "Failed to generate agenda";
     }
   }
 } 

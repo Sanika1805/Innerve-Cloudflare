@@ -1,5 +1,17 @@
 name = "universal-ai-assistant"
 main = "src/index.js"  # or whatever your main file path is
-compatibility_date = "2024-02-07"
+compatibility_date = "2024-01-01"
+
+# Add this compatibility flag
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+GOOGLE_CLIENT_ID = ""
+GOOGLE_CLIENT_SECRET = ""
+GOOGLE_REDIRECT_URI = ""
+JWT_SECRET = ""
+OPENAI_API_KEY = ""
+ZOOM_API_TOKEN = ""
+ZOOM_VERIFICATION_TOKEN = ""
 
 # ... any other existing configuration ... 

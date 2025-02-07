@@ -1,60 +1,39 @@
+import { google } from 'googleapis';
+
 export class GoogleAuthHandler {
   constructor() {
-    this.clientId = process.env.GOOGLE_CLIENT_ID;
-    this.clientSecret = process.env.GOOGLE_CLIENT_SECRET;
-    this.redirectUri = process.env.GOOGLE_REDIRECT_URI;
+    this.oauth2Client = new google.auth.OAuth2(
+      process.env.GOOGLE_CLIENT_ID,
+      process.env.GOOGLE_CLIENT_SECRET,
+      process.env.GOOGLE_REDIRECT_URI
+    );
   }
 
   getAuthUrl() {
-    const scopes = [
-      'https://www.googleapis.com/auth/calendar',  // Full calendar access
-      'https://www.googleapis.com/auth/calendar.events',
-      'https://www.googleapis.com/auth/userinfo.profile',
-      'https://www.googleapis.com/auth/userinfo.email'
-    ];
-
-    const params = new URLSearchParams({
-      client_id: this.clientId,
-      redirect_uri: this.redirectUri,
-      response_type: 'code',
-      scope: scopes.join(' '),
+    return this.oauth2Client.generateAuthUrl({
       access_type: 'offline',
-      prompt: 'consent'
+      scope: [
+        'https://www.googleapis.com/auth/calendar',
+        'https://www.googleapis.com/auth/userinfo.profile',
+        'https://www.googleapis.com/auth/userinfo.email'
+      ]
     });
-
-    return `https://accounts.google.com/o/oauth2/v2/auth?${params.toString()}`;
   }
 
   async handleCallback(code) {
     try {
-      const tokenResponse = await fetch('https://oauth2.googleapis.com/token', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: new URLSearchParams({
-          code,
-          client_id: this.clientId,
-          client_secret: this.clientSecret,
-          redirect_uri: this.redirectUri,
-          grant_type: 'authorization_code'
-        })
-      });
-
-      if (!tokenResponse.ok) {
-        throw new Error('Failed to get access token');
-      }
-
-      const tokens = await tokenResponse.json();
+      const { tokens } = await this.oauth2Client.getToken(code);
+      this.oauth2Client.setCredentials(tokens);
       
-      // Store tokens in KV
+      const oauth2 = google.oauth2({ version: 'v2', auth: this.oauth2Client });
+      const userInfo = await oauth2.userinfo.get();
+      
       return {
-        access_token: tokens.access_token,
-        refresh_token: tokens.refresh_token,
-        expiry_date: Date.now() + (tokens.expires_in * 1000)
+        tokens,
+        profile: userInfo.data
       };
     } catch (error) {
-      console.error('Token exchange error:', error);
+      console.error('Google Auth Error:', error);
       throw error;
     }
   }
