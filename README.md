@@ -43,21 +43,34 @@ name = "ai-assistant"
 account_id = "your_cloudflare_account_id"
 ```
 
-### Step 4: Deployment
+### Step 4: Deployment & Access
+
+1. **Deploy to Cloudflare Workers:**
 ```bash
-# Install Wrangler CLI
-npm install -g wrangler
+# Install dependencies
+npm install
 
-# Login to Cloudflare
-wrangler login
-
-# Create KV namespace
-wrangler kv:namespace create "KV"
-
-# Deploy
+# Deploy to Cloudflare
 npm run deploy
 ```
 
+2. **Access Your Application:**
+- Open your browser and go to: https://ai-assistant.bharadwajchavan0.workers.dev
+- You'll be redirected to the login page
+- Sign in with your Google account
+- Grant necessary calendar permissions when prompted
+
+3. **Verify Setup:**
+- Check that you can view your calendar
+- Try scheduling a new meeting
+- Test the AI agenda generation feature
+
+4. **Troubleshooting Access:**
+If you cannot access the application:
+- Verify your Cloudflare Workers service is running
+- Check the browser console for errors
+- Ensure all environment variables are properly set in Cloudflare
+- Confirm your Google Cloud OAuth consent screen is properly configured
 
 ## 🎯 Features
 
@@ -99,9 +112,9 @@ Cloudflare/
 
 Run locally:
 ```bash
-npm run dev
+npm run deploy
 ```
-Access at: `http://localhost:8787`
+Access at: `https://ai-assistant.bharadwajchavan0.workers.dev`
 
 ## ⚠️ Common Issues & Solutions
 
