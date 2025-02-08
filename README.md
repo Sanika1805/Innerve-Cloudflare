@@ -7,8 +7,8 @@ A modern AI-powered meeting management system built with Cloudflare Workers that
 ### Step 1: Clone and Setup
 ```bash
 # Clone the repository (if you haven't already)
-git clone <your-repository-url>
-cd <repository-name>
+git clone "https://github.com/Sanika1805/Innerve-Cloudflare.git"
+cd Innerve-Cloudflare
 
 # Install dependencies
 npm install
