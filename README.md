@@ -2,6 +2,121 @@
 
 A modern AI-powered meeting management system built with Cloudflare Workers that helps you schedule meetings, create agendas, and manage your calendar efficiently.
 
+## 🚀 Quick Deployment Guide
+
+### Step 1: Clone and Setup
+```bash
+# Clone the repository (if you haven't already)
+git clone <your-repository-url>
+cd <repository-name>
+
+# Install dependencies
+npm install
+```
+
+### Step 2: Configure Cloudflare
+1. Create a Cloudflare account at https://dash.cloudflare.com/sign-up
+2. Install Wrangler CLI:
+```bash
+npm install -g wrangler
+```
+3. Login to Cloudflare through Wrangler:
+```bash
+wrangler login
+```
+
+### Step 3: Update Configuration
+1. Create a `wrangler.toml` file in your project root:
+```toml
+name = "ai-assistant"
+main = "src/index.js"
+compatibility_date = "2023-01-01"
+
+[vars]
+ENVIRONMENT = "production"
+```
+
+2. Set up your environment variables:
+```bash
+# Set your environment variables in Cloudflare
+wrangler secret put GOOGLE_CLIENT_ID
+wrangler secret put GOOGLE_CLIENT_SECRET
+wrangler secret put JWT_SECRET
+wrangler secret put OPENAI_API_KEY
+```
+
+### Step 4: Deploy
+1. Deploy to Cloudflare Workers:
+```bash
+wrangler deploy
+```
+
+2. Your application will be available at: https://ai-assistant.bharadwajchavan0.workers.dev
+
+### Step 5: Verify Deployment
+1. Open your browser
+2. Visit https://ai-assistant.bharadwajchavan0.workers.dev
+3. You should see the meeting management interface
+4. Test creating a new meeting using the "New Meeting" button
+
+### Troubleshooting Deployment
+
+If you encounter issues:
+
+1. **Blank Page or 404 Error:**
+```bash
+# Verify your deployment
+wrangler tail
+```
+
+2. **Worker Not Found:**
+```bash
+# Check worker status
+wrangler status ai-assistant
+```
+
+3. **Environment Variables:**
+```bash
+# List all secrets
+wrangler secret list
+```
+
+4. **Deployment Failed:**
+```bash
+# Check logs
+wrangler deploy --dry-run
+```
+
+## 🔍 Post-Deployment Verification
+
+1. **Check Application Status:**
+   - Visit https://ai-assistant.bharadwajchavan0.workers.dev
+   - Verify the page loads correctly
+   - Check browser console for any errors
+
+2. **Test Core Features:**
+   - Create a new meeting
+   - View existing meetings
+   - Check form submissions
+
+3. **Monitor Usage:**
+   - Check Cloudflare Workers dashboard
+   - Monitor API calls
+   - Review error logs
+
+## 📞 Need Help?
+
+If you encounter any issues:
+1. Check Cloudflare Workers status page
+2. Review deployment logs
+3. Verify all environment variables are set
+4. Ensure your Cloudflare account is active
+
+For additional support:
+- Open an issue in the repository
+- Check Cloudflare Workers documentation
+- Review the error logs in Cloudflare Dashboard
+
 ## 🚀 Quick Start Guide
 
 ### Prerequisites
